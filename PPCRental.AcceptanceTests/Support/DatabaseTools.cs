@@ -9,7 +9,7 @@ namespace PPCRental.AcceptanceTests.Support
         [BeforeScenario]
         public void CleanDatabase()
         {
-            using (var db = new K21T1_Team3Entities())
+            using (var db = new PPCEntities())
             {
 
                 db.PROPERTies.RemoveRange(db.PROPERTies);

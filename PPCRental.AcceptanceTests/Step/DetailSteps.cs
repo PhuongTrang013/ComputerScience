@@ -5,16 +5,16 @@ using System;
 namespace PPCRental.AcceptanceTests.Step
 {
     [Binding, Scope(Tag = "automated")]
-    class DetailStep
+    class DetailSteps
     {
 
-        private readonly PropertyDetailsDriver _propertyDriver;
+        private readonly DetailPropertyDriver _propertyDriver;
 
-        public DetailStep(PropertyDetailsDriver driver)
+        public DetailSteps(DetailPropertyDriver driver)
         {
             _propertyDriver = driver;
         }
-
+        
         [Given(@"the following projects")]
         public void GivenTheFollowingProjects(Table givenProjects)
         {

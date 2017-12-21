@@ -1,13 +1,11 @@
-﻿using FluentAssertions;
-using PPCRental.Controllers;
-using PPCRental.Models;
-using PPCRental.AcceptanceTests.Support;
+﻿using System;
 using System.Linq;
 using System.Web.Mvc;
+using PPCRental.Models;
+using PPCRental.AcceptanceTests.Support;
+using PPCRental.Controllers;
+using FluentAssertions;
 using TechTalk.SpecFlow;
-using System;
-
-
 
 namespace PPCRental.AcceptanceTests.Driver.Property
 {
@@ -17,34 +15,37 @@ namespace PPCRental.AcceptanceTests.Driver.Property
         private ActionResult _result;
 
 
-        public void InsertProjectToDB(Table projects)
+        public void InsertProjectToDB(Table project)
         {
-            using (var db = new K21T1_Team3Entities())
+            using (var db = new PPCEntities())
             {
 
-                foreach (var item in projects.Rows)
+                foreach (var item in project.Rows)
                 {
+                    var street = item["Street"].ToString();
+                    var district = item["District"].ToString();
+                    var ward = item["Ward"].ToString();
                     var property = item["PropertyName"].ToString();
                     var content = item["Content"].ToString();
-                    var protype = item["PropertyType"].ToString();
-                    var street = item["Street"].ToString();
-                    var ward = item["Ward"].ToString();
-                    var district = item["District"].ToString();
+                    var price = item["Price"].ToString();
+                    var bath = item["Bathroom"].ToString();
+                    var bed = item["Bedroom"].ToString();
+                    var pkplace = item["PackingPlace"].ToString();
 
                     PROPERTY pro = new PROPERTY()
                     {
-
                         PropertyName = property,
                         Content = content,
-                        Price = int.Parse(item["Price"].ToString()),
-                        PropertyType_ID = db.PROPERTY_TYPE.FirstOrDefault(t => t.CodeType == protype).ID,
                         Street_ID = db.STREETs.FirstOrDefault(s => s.StreetName == street).ID,
                         Ward_ID = db.WARDs.FirstOrDefault(s => s.WardName == ward).ID,
-                        District_ID = db.DISTRICTs.FirstOrDefault(s => s.DistrictName == district).ID
-
+                        District_ID = db.DISTRICTs.FirstOrDefault(s => s.DistrictName == district).ID,
+                        Price = int.Parse(price),
+                        BathRoom = int.Parse(bath),
+                        BedRoom = int.Parse(bed),
+                        PackingPlace = int.Parse(pkplace),
 
                     };
-                    _context.ReferenceDetails.Add(projects.Header.Contains("ID") ? item["ID"] : pro.PropertyName, pro);
+                    _context.ReferenceDetails.Add(project.Header.Contains("ID") ? item["ID"] : pro.PropertyName, pro);
                     db.PROPERTies.Add(pro);
                 }
                 db.SaveChanges();
@@ -66,7 +67,7 @@ namespace PPCRental.AcceptanceTests.Driver.Property
 
         public void OpenPropertyDetails(string PropertyName)
         {
-            var db = new K21T1_Team3Entities();
+            var db = new PPCEntities();
 
             int property_Id = db.PROPERTies.FirstOrDefault(r => r.PropertyName == PropertyName).ID;
 
