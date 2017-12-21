@@ -4,11 +4,9 @@
 @{
     ViewBag.Title = "ViewDetailOfProject";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var db = new K21T1_Team3Entities();
+    var db = new PPCEntities();
     var feature = db.PROPERTY_FEATURE.ToList().Where(s => s.Property_ID == Model.ID);
-    //var imgID = db.PROPERTY_IMG.ToList().Where(x => x.Img_ID == Model.ID);
-    //var img = db.IMAGES.ToList();
-    var type = db.PROPERTies.ToList();
+    var property = db.PROPERTies.ToList();
 }
 <link href="~/Content/details.css" rel="stylesheet" />
 <div class="container-fluid">
@@ -30,16 +28,8 @@
                                 <h1 class="modal-title text-center">@Html.ValueFor(model => model.PropertyName)</h1>
                             </div>
                             <div class="modal-body">
-
                                 <!-- start -->
                                 <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                                    <!-- Indicators -->
-                                    @*<ol class="carousel-indicators">
-                                            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                                            <li data-target="#myCarousel" data-slide-to="1"></li>
-                                            <li data-target="#myCarousel" data-slide-to="2"></li>
-                                        </ol>*@
-
                                     <!-- Wrapper for slides -->
                                     <div class="carousel-inner">
                                         @{
@@ -47,10 +37,10 @@
 
                                         }
 
-                                        @foreach (var item in Model.PROPERTY_IMG)
+                                        @foreach (var item in property)
                                         {
 
-                                            string arrImg = (@item.IMAGE.ImgName).ToString();
+                                            string arrImg = (@item.Images).ToString();
                                             string[] splitarr = arrImg.Split(',');
                                             int dem = splitarr.Count();
                                             string hinh = "";
@@ -63,11 +53,6 @@
                                             }
 
                                         }
-
-                                        @*<div class="item">
-                                                <img src="~/Images/@Html.DisplayFor(model=>model.Images)" alt="Chicago" style="width:100%;">
-                                            </div>*@
-
                                     </div>
 
                                     <!-- Left and right controls -->
@@ -83,9 +68,6 @@
 
                                 <!-- end -->
                             </div>
-                            <!-- 					        <div class="modal-footer">
-                                                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                        </div> -->
                         </div>
 
                     </div>
@@ -123,8 +105,6 @@
                 <div class="media">
                     <div class="media-body">
                         <h1 class="media-heading">@Html.DisplayFor(model => model.PropertyName)</h1>
-                        @*<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>*@
-
                         <h4><strong>The space</strong></h4>
                         <p style="letter-spacing: 1px;text-align: justify;">
                             @Html.DisplayFor(model => model.Content)
@@ -246,7 +226,7 @@
 <div class="container property-type-detail">
     <h2 class="h2-projectlq">Các dự án liên quan</h2>
     <div class="duanlienquan">
-        @{foreach (var item in type)
+        @{foreach (var item in property)
             {
                 if (item.PropertyType_ID == Model.PropertyType_ID && item.ID != Model.ID)
                 {
