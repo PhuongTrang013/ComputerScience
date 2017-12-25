@@ -1,7 +1,7 @@
 ﻿@using PPCRental.Models;
 @model PPCRental.Models.PROPERTY
 @{
-    team13Entities db = new team13Entities();
+    PPCEntities db = new PPCEntities();
     List<PROPERTY_TYPE> prop = new List<PROPERTY_TYPE>();
     prop = db.PROPERTY_TYPE.ToList();
 }
