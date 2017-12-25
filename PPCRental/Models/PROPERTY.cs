@@ -18,7 +18,6 @@ namespace PPCRental.Models
         public PROPERTY()
         {
             this.PROPERTY_FEATURE = new HashSet<PROPERTY_FEATURE>();
-            this.PROPERTY_IMG = new HashSet<PROPERTY_IMG>();
         }
     
         public int ID { get; set; }
@@ -48,8 +47,6 @@ namespace PPCRental.Models
         public virtual PROJECT_STATUS PROJECT_STATUS { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PROPERTY_FEATURE> PROPERTY_FEATURE { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PROPERTY_IMG> PROPERTY_IMG { get; set; }
         public virtual PROPERTY_TYPE PROPERTY_TYPE { get; set; }
         public virtual STREET STREET { get; set; }
         public virtual USER USER { get; set; }

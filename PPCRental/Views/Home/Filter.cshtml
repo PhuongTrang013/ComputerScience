@@ -9,7 +9,7 @@
         <div class="container content-header">
             <div class="row fullwidth_bg">
                 <div class="container text-center">
-                    <img class="img-Logo" src="~/Images/Logomain.png" alt="Logomain.png">
+                    <img class="img-Logo" src="~/Images/Logomain.png" alt="PPC-RENTAL-LOGO">
                 </div>
             </div>
         </div>
@@ -23,11 +23,11 @@
         <div class="row-md4-content">
             @foreach (var item in Model)
             {
-                <div class="col-md-4">
+                <div class="col-md-4 figure-filter">
                     <a href='/ViewDetailOfProjectUser/ViewDetailOfProject/@item.ID'>
                         <div class="row outside-img">
-                            <img class="img-responsive" src="~/Images/@item.Avatar" alt="">
-                            <img class="img-responsive img-last" src="~/Images/@item.Images" alt="">
+                            <img class="img-responsive" src="~/Images/@item.Avatar" alt="@item.PropertyName">
+                            @*<img class="img-responsive img-last" src="~/Images/@item.Images" alt="">*@
                         </div>
                         <div class="list-img-banner">Mới</div>
                         <div class="content-project">

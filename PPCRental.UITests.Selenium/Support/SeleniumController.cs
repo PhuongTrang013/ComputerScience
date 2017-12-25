@@ -61,12 +61,13 @@ namespace PPCRental.UITests.Selenium.Support
 
         private void StartIisExpress()
         {
-            int PortNumber = int.Parse(SeleniumController.BaseUrl.Substring(SeleniumController.BaseUrl.LastIndexOf(':') + 1, 5));
+            int PortNumber = int.Parse(BaseUrl.Substring((BaseUrl.LastIndexOf(':') + 1), (BaseUrl.LastIndexOf('/') - (BaseUrl.LastIndexOf(':') + 1))));
 
             var app = new WebApplication(ProjectLocation.FromFolder("PPCRental"), PortNumber);
             app.AddEnvironmentVariable("UITests");
             WebServer = new IisExpressWebServer(app);
             WebServer.Start("Release");
+
         }
     }
 }

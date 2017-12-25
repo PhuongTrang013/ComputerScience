@@ -119,9 +119,11 @@ testRunner.Given("the following projects", ((string)(null)), table1, "Given ");
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("The author the Propertyname of a project can be seen")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "US01_PPCRentalDetails")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("automated")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("web")]
         public virtual void TheAuthorThePropertynameOfAProjectCanBeSeen()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("The author the Propertyname of a project can be seen", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("The author the Propertyname of a project can be seen", new string[] {
+                        "web"});
 #line 14
 this.ScenarioSetup(scenarioInfo);
 #line 7

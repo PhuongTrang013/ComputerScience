@@ -6,13 +6,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     var db = new PPCEntities();
     var feature = db.PROPERTY_FEATURE.ToList().Where(s => s.Property_ID == Model.ID);
+    var property_id = db.PROPERTies.ToList().Where(d => d.ID == Model.ID);
     var property = db.PROPERTies.ToList();
 }
 <link href="~/Content/details.css" rel="stylesheet" />
 <div class="container-fluid">
     <div class="row">
 
-        <div class="content-img" style="background: url(/Images/@Model.Images) center no-repeat #f5f1ed; background-size: cover;height: 600px ;position: relative;">
+        <div class="content-img" style="background: url(/Images/@Model.Avatar) center no-repeat #f5f1ed; background-size: cover;height: 600px ;position: relative;">
 
             <div class="button-view-detailsIMG">
                 <!-- button -->
@@ -37,7 +38,7 @@
 
                                         }
 
-                                        @foreach (var item in property)
+                                        @foreach (var item in property_id)
                                         {
 
                                             string arrImg = (@item.Images).ToString();
@@ -48,7 +49,7 @@
                                             {
                                                 hinh = splitarr[i];
                                                 <div class="item @(count++ > 0 ? null : "active")">
-                                                    <img src="~/Images/@hinh" alt="Los Angeles" style="width:100%;height: 75vh;">
+                                                    <img src="~/Images/@hinh" alt="@item.PropertyName" style="width:100%;height: 75vh;">
                                                 </div>
                                             }
 
@@ -109,28 +110,6 @@
                         <p style="letter-spacing: 1px;text-align: justify;">
                             @Html.DisplayFor(model => model.Content)
                         </p>
-
-                        <!-- button -->
-                        <button type="button" class="btn btn-default btn-md" data-toggle="modal" data-target="#myModal">Contact&nbsp;host</button>
-                        <!-- Modal -->
-                        <div class="modal fade" id="myModal" role="dialog">
-                            <div class="modal-dialog">
-                                <!-- Modal content-->
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        <h4 class="modal-title">Modal Header</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p>Some text in the modal.</p>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
                     <div class="media-right text-center">
                         <img src="~/Images/@Html.DisplayFor(model => model.Avatar)" class="media-object img-circle" style="width:64px; height: 64px">Author
@@ -173,9 +152,9 @@
                         <div class="row">
                             <ul class="Amenities-tienich">
 
-                                @foreach (var item in db.FEATUREs)
+                                @foreach (var item in feature)
                                 {
-                                    <li id="@item.ID" class="col-md-6" style="opacity: 0.3"><i class="fa @item.Icon" aria-hidden="@item.Status"></i>&nbsp;@item.FeatureName</li>
+                                    <li id="@item.FEATURE.ID" class="col-md-6"><i class="fa @item.FEATURE.Icon" aria-hidden="@item.FEATURE.Status"></i>&nbsp;@item.FEATURE.FeatureName</li>
                                 }
 
                             </ul>
@@ -233,10 +212,10 @@
                     <div class="col-sm-6 col-md-4">
                         <a class="none-decoration" href="/ViewDetailOfProjectUser/ViewDetailOfProject/@item.ID">
                             <div class="thumbnail width-thumb" title="Click để xem chi tiết">
-                                <img src="~/Images/@item.Images" alt="@item.Images">
+                                <img src="~/Images/@item.Avatar" alt="@item.PropertyName">
                                 <div class="caption text-justify">
                                     <h3 class="tenduan">@item.PropertyName</h3>
-                                    <p class="content-property-type-detail">@item.Content</p>
+                                    @*<p class="content-property-type-detail">@item.Content</p>*@
                                     <div class="content-project" style="color:black">
                                         <h3 class="col-md-6">@item.DISTRICT.DistrictName<br />@item.Area</h3>
                                         <p class="col-md-6">@item.PROPERTY_TYPE.Description<br />@item.Price @item.UnitPrice</p>
@@ -247,18 +226,9 @@
                         </a>
                     </div>
                 }
-
             }
         }
     </div>
 </div>
 
 <div class="parallax-selector"></div>
-@{ foreach (var item2 in feature)
-    {
-        <script src="~/Scripts/jquery-3.2.1.js"></script>
-        <script type="text/javascript">
-            $("#@item2.Feature_ID").css("opacity", "1");
-        </script>
-    }
-}

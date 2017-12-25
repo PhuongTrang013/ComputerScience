@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Yêu cầu hỗ trợ từ: {{tieude}}</title>
+    <meta charset="utf-8" />
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <style type="text/css">
+        ol.info-user li {
+            margin: 10px 0;
+            font-weight: 600;
+        }
+
+        .flex {
+            display: flex;
+            justify-content: space-around;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid flex">
+        <div class="col-md-4 col-md-offset-2">
+            <h3>Thông tin yêu cầu hỗ trợ:</h3>
+            <ol class="info-user">
+                <li>
+                    Tên: {{name}}
+                </li>
+                <li>
+                    Số điện thoại: {{phone}}
+                </li>
+                <li>
+                    Email: {{email}}
+                </li>
+                <li>
+                    Nội dung: {{noidung}}
+                </li>
+            </ol>
+        </div>
+
+
+        <!--<div class="col-md-4 col-md-offset-1">
+            <img src="https://calderaforms.com/wp-content/uploads/2017/03/Man-standing-on-a-mountain.jpeg" class="img-rounded" alt="PPCRental" width="240px" height="auto"/>
+        </div>-->
+    </div>
+</body>
+</html>

@@ -81,9 +81,9 @@
                     </div>
                     <cite>Sưu tầm</cite>
                 </quote>
-                <div class="img-bottom hidden-xs">
+                @*<div class="img-bottom hidden-xs">
                     <img src="~/Images/cutoff.svg" alt="">
-                </div>
+                </div>*@
             </div>
             <div class="parallax-selector"></div>
             <section>
@@ -96,16 +96,15 @@
                     @{ int count = 0; }
                     @{ foreach (var item in Model)
                         {
-                            <div class="col-md-4">
+                            <div class="col-md-4 figure-index">
                                 <a href='/ViewDetailOfProjectUser/ViewDetailOfProject/@item.ID'>
                                     <div class="row outside-img">
-                                        <img class="img-responsive" src="~/Images/@item.Avatar" alt="">
-                                        <img class="img-responsive img-last" src="~/Images/nha1.2.jpg" alt="">
+                                        <img class="img-responsive" src="~/Images/@item.Avatar" alt="@item.PropertyName">
                                     </div>
                                     <div class="list-img-banner">Mới</div>
-                                    <div class="content-project">
-                                        <h3 style="color:black">@item.PropertyName<br />@item.DISTRICT.DistrictName</h3>
-                                        <p style="color:black">@item.Price @item.UnitPrice<br />@item.PROPERTY_TYPE.Description</p>
+                                    <div class="content-project" style="color: black;">
+                                        <h3>@item.PropertyName<br />@item.DISTRICT.DistrictName</h3>
+                                        <p>@item.Price @item.UnitPrice<br />@item.PROPERTY_TYPE.Description</p>
                                     </div>
                                 </a> 
                             </div>
@@ -121,7 +120,7 @@
             </section>
         </div>
         <div class="parallax-selector"></div>
-        <section>
+        <section id="typeproject-index">
             <div class="caption section-header text-center">
                 <h1 class="heading is-section">Loại Dự Án</h1>
             </div>
@@ -204,14 +203,14 @@
     <div class="parallax-selector"></div>
     <div class="container-fluid on-bg-behind-content">
         <div class="row behind-content">
-            <img class="behind-content" src="~/Images/behind-content.jpg" alt="">
+            @*<img class="behind-content" src="~/Images/behind-content.jpg" alt="">*@
             <div class="fullwidth_bg content-on-bg-behind">
                 <h2>Foirfeachta Villa</h2>
                 <a class="button-all-learnmore" href="">Xem thêm</a>
             </div>
-            <div class="img-bottom hidden-sm hidden-xs">
+            @*<div class="img-bottom hidden-sm hidden-xs">
                 <img class="img-bottom-behind-content" src="~/Images/cutoff.svg" alt="">
-            </div>
+            </div>*@
         </div>
     </div>
     <div class="parallax-selector hidden-lg hidden-md"></div>

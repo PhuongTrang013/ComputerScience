@@ -17,5 +17,6 @@ namespace PPCRental.Models
         public int ID { get; set; }
         public string SocialNetworkName { get; set; }
         public string Link { get; set; }
+        public string Icon { get; set; }
     }
 }

@@ -13,7 +13,7 @@ namespace PPCRental.Controllers
         PPCEntities db = new PPCEntities();
         public ActionResult Index()
         {
-            var pro = db.PROPERTies.ToList();
+            var pro = db.PROPERTies.ToList().OrderByDescending(x => x.ID);
             return View(pro);
         }
         public ActionResult Filter(string propname, int? PropertyType, int? bathroom, int? price, int? Quan_ID)

@@ -12,13 +12,10 @@ namespace PPCRental.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class PROPERTY_IMG
+    public partial class HISTORY
     {
         public int ID { get; set; }
-        public Nullable<int> Property_ID { get; set; }
-        public Nullable<int> Img_ID { get; set; }
-    
-        public virtual IMAGE IMAGE { get; set; }
-        public virtual PROPERTY PROPERTY { get; set; }
+        public Nullable<int> Year { get; set; }
+        public string History1 { get; set; }
     }
 }

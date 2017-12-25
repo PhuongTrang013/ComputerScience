@@ -3,40 +3,42 @@
 @{
     ViewBag.Title = "IndexDuAn";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    team13Entities db = new team13Entities();
+    PPCEntities db = new PPCEntities();
     List<PROPERTY_TYPE> prop = new List<PROPERTY_TYPE>();
     prop = db.PROPERTY_TYPE.ToList();
 }
 <div class="container-fluid background-viewlist"></div>
 
-<ul class="nav nav-tabs">
-    @foreach (var item in prop)
-    {
-        <li><a href="@Url.Action("ViewListOfProjectUser","ViewListOfProject",new { typeid = @item.ID})">@item.CodeType</a></li>
-    }
+<div class="container-fluid main-list">
 
-</ul>
+    <ul class="nav nav-tabs">
 
-<div class="tab-content">
-    <div id="home" class="tab-pane fade in active">
-        <div class="container-fluid duan">
-            @{foreach (var item in Model)
-                {
-                    <div class="col-sm-6 col-md-4">
-                        <a href="/ViewDetailOfProjectUser/ViewDetailOfProject/@item.ID">
-                            <div class="thumbnail">
-                                <img src="~/Images/@item.Images" />
-                                <div class="content-project">
-                                    <h3 style="color:black">@item.PropertyName <br />Đường @item.STREET.StreetName @item.DISTRICT.DistrictName </h3>
-                                    <p style="color:black">@item.Price @item.UnitPrice</p>
+        @foreach (var item in prop)
+        {
+            <li><a href="@Url.Action("ViewListOfProjectUser","ViewListOfProject",new { typeid = @item.ID})">@item.CodeType</a></li>
+        }
+
+    </ul>
+    <br />
+    <div class="tab-content">
+        <div id="home" class="tab-pane fade in active">
+            <div class="container-fluid duan">
+                @{foreach (var item in Model)
+                    {
+                        <div class="col-sm-6 col-md-4">
+                            <a class="typepro-list" href="/ViewDetailOfProjectUser/ViewDetailOfProject/@item.ID">
+                                <div class="thumbnail thum-typepro">
+                                    <img src="~/Images/@item.Avatar" />
+                                    <div class="content-project" style="color:black">
+                                        <h3>@item.PropertyName <br />Đường @item.STREET.StreetName @item.DISTRICT.DistrictName </h3>
+                                        <p>@item.Price @item.UnitPrice <br /> @item.PROPERTY_TYPE.Description </p>
+                                    </div>
                                 </div>
-                            </div>
-                        </a>
-                    </div>
+                            </a>
+                        </div>
+                    }
                 }
-            }
+            </div>
         </div>
     </div>
 </div>
-
-

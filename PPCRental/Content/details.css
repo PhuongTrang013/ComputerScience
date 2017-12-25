@@ -47,7 +47,7 @@ p.content-property-type-detail {
 
 .thumbnail.width-thumb {
     /* width: 20vw; */
-    height: 524px;
+    height: 396px;
     transition: all .5s ease-in-out;
     cursor: pointer;
 }

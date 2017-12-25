@@ -31,12 +31,26 @@
           <Property Name="Status" Type="bit" />
           <Property Name="Icon" Type="varchar" MaxLength="50" />
         </EntityType>
-        <EntityType Name="IMAGES">
+        <EntityType Name="HISTORY">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ImgName" Type="varchar" MaxLength="200" />
+          <Property Name="Year" Type="int" />
+          <Property Name="History" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="MEMBER">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Member" Type="nvarchar" MaxLength="50" />
+          <Property Name="Member_Info" Type="nvarchar" MaxLength="50" />
+          <Property Name="Avatar" Type="nvarchar" MaxLength="200" />
+          <Property Name="Facebook" Type="nvarchar" MaxLength="200" />
+          <Property Name="Twitter" Type="nvarchar" MaxLength="200" />
+          <Property Name="Instagram" Type="nvarchar" MaxLength="200" />
+          <Property Name="Icon" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="MESSAGE">
           <Key>
@@ -55,6 +69,7 @@
           </Key>
           <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="Status_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Status" Type="bit" />
         </EntityType>
         <EntityType Name="PROPERTY">
           <Key>
@@ -91,14 +106,6 @@
           <Property Name="Property_ID" Type="int" />
           <Property Name="Feature_ID" Type="int" />
         </EntityType>
-        <EntityType Name="PROPERTY_IMG">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Property_ID" Type="int" />
-          <Property Name="Img_ID" Type="int" />
-        </EntityType>
         <EntityType Name="PROPERTY_TYPE">
           <Key>
             <PropertyRef Name="ID" />
@@ -106,14 +113,14 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CodeType" Type="varchar" MaxLength="10" />
           <Property Name="Description" Type="nvarchar" MaxLength="50" />
-          <Property Name="Image" Type="varchar" MaxLength="200" />
+          <Property Name="Status" Type="bit" />
         </EntityType>
         <EntityType Name="ROLE">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="RoleName" Type="nvarchar" MaxLength="30" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="30" Nullable="false" />
         </EntityType>
         <EntityType Name="SOCIALNETWORK">
           <Key>
@@ -122,6 +129,7 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="SocialNetworkName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Link" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Icon" Type="varchar" MaxLength="30" />
         </EntityType>
         <EntityType Name="STREET">
           <Key>
@@ -197,30 +205,6 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="PROPERTY_FEATURE">
-              <PropertyRef Name="Property_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PROPERTY_IMG_IMAGES">
-          <End Role="IMAGES" Type="Self.IMAGES" Multiplicity="0..1" />
-          <End Role="PROPERTY_IMG" Type="Self.PROPERTY_IMG" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="IMAGES">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="PROPERTY_IMG">
-              <PropertyRef Name="Img_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PROPERTY_IMG_PROPERTY">
-          <End Role="PROPERTY" Type="Self.PROPERTY" Multiplicity="0..1" />
-          <End Role="PROPERTY_IMG" Type="Self.PROPERTY_IMG" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PROPERTY">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="PROPERTY_IMG">
               <PropertyRef Name="Property_ID" />
             </Dependent>
           </ReferentialConstraint>
@@ -337,12 +321,12 @@
           <EntitySet Name="CONTACT" EntityType="Self.CONTACT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DISTRICT" EntityType="Self.DISTRICT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FEATURE" EntityType="Self.FEATURE" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="IMAGES" EntityType="Self.IMAGES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HISTORY" EntityType="Self.HISTORY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MEMBER" EntityType="Self.MEMBER" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MESSAGE" EntityType="Self.MESSAGE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PROJECT_STATUS" EntityType="Self.PROJECT_STATUS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PROPERTY" EntityType="Self.PROPERTY" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PROPERTY_FEATURE" EntityType="Self.PROPERTY_FEATURE" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PROPERTY_IMG" EntityType="Self.PROPERTY_IMG" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PROPERTY_TYPE" EntityType="Self.PROPERTY_TYPE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ROLE" EntityType="Self.ROLE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SOCIALNETWORK" EntityType="Self.SOCIALNETWORK" Schema="dbo" store:Type="Tables" />
@@ -361,14 +345,6 @@
           <AssociationSet Name="FK_PROPERTY_FEATURE_PROPERTY" Association="Self.FK_PROPERTY_FEATURE_PROPERTY">
             <End Role="PROPERTY" EntitySet="PROPERTY" />
             <End Role="PROPERTY_FEATURE" EntitySet="PROPERTY_FEATURE" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PROPERTY_IMG_IMAGES" Association="Self.FK_PROPERTY_IMG_IMAGES">
-            <End Role="IMAGES" EntitySet="IMAGES" />
-            <End Role="PROPERTY_IMG" EntitySet="PROPERTY_IMG" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PROPERTY_IMG_PROPERTY" Association="Self.FK_PROPERTY_IMG_PROPERTY">
-            <End Role="PROPERTY" EntitySet="PROPERTY" />
-            <End Role="PROPERTY_IMG" EntitySet="PROPERTY_IMG" />
           </AssociationSet>
           <AssociationSet Name="FK_PROPERTY_PROJECT_STATUS" Association="Self.FK_PROPERTY_PROJECT_STATUS">
             <End Role="PROJECT_STATUS" EntitySet="PROJECT_STATUS" />
@@ -442,13 +418,26 @@
           <Property Name="Icon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="PROPERTY_FEATURE" Relationship="Self.FK_PROPERTY_FEATURE_FEATURE" FromRole="FEATURE" ToRole="PROPERTY_FEATURE" />
         </EntityType>
-        <EntityType Name="IMAGE">
+        <EntityType Name="HISTORY">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ImgName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="PROPERTY_IMG" Relationship="Self.FK_PROPERTY_IMG_IMAGES" FromRole="IMAGES" ToRole="PROPERTY_IMG" />
+          <Property Name="Year" Type="Int32" />
+          <Property Name="History1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="MEMBER">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Member1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Member_Info" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Avatar" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Facebook" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Twitter" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Instagram" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Icon" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="MESSAGE">
           <Key>
@@ -467,6 +456,7 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" />
           <Property Name="Status_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" />
           <NavigationProperty Name="PROPERTies" Relationship="Self.FK_PROPERTY_PROJECT_STATUS" FromRole="PROJECT_STATUS" ToRole="PROPERTY" />
         </EntityType>
         <EntityType Name="PROPERTY">
@@ -498,7 +488,6 @@
           <NavigationProperty Name="DISTRICT" Relationship="Self.FK_PROPERTY_DISTRICT" FromRole="PROPERTY" ToRole="DISTRICT" />
           <NavigationProperty Name="PROJECT_STATUS" Relationship="Self.FK_PROPERTY_PROJECT_STATUS" FromRole="PROPERTY" ToRole="PROJECT_STATUS" />
           <NavigationProperty Name="PROPERTY_FEATURE" Relationship="Self.FK_PROPERTY_FEATURE_PROPERTY" FromRole="PROPERTY" ToRole="PROPERTY_FEATURE" />
-          <NavigationProperty Name="PROPERTY_IMG" Relationship="Self.FK_PROPERTY_IMG_PROPERTY" FromRole="PROPERTY" ToRole="PROPERTY_IMG" />
           <NavigationProperty Name="PROPERTY_TYPE" Relationship="Self.FK_PROPERTY_PROPERTY_TYPE" FromRole="PROPERTY" ToRole="PROPERTY_TYPE" />
           <NavigationProperty Name="STREET" Relationship="Self.FK_PROPERTY_STREET1" FromRole="PROPERTY" ToRole="STREET" />
           <NavigationProperty Name="USER" Relationship="Self.FK_PROPERTY_USER" FromRole="PROPERTY" ToRole="USER" />
@@ -515,16 +504,6 @@
           <NavigationProperty Name="FEATURE" Relationship="Self.FK_PROPERTY_FEATURE_FEATURE" FromRole="PROPERTY_FEATURE" ToRole="FEATURE" />
           <NavigationProperty Name="PROPERTY" Relationship="Self.FK_PROPERTY_FEATURE_PROPERTY" FromRole="PROPERTY_FEATURE" ToRole="PROPERTY" />
         </EntityType>
-        <EntityType Name="PROPERTY_IMG">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Property_ID" Type="Int32" />
-          <Property Name="Img_ID" Type="Int32" />
-          <NavigationProperty Name="IMAGE" Relationship="Self.FK_PROPERTY_IMG_IMAGES" FromRole="PROPERTY_IMG" ToRole="IMAGES" />
-          <NavigationProperty Name="PROPERTY" Relationship="Self.FK_PROPERTY_IMG_PROPERTY" FromRole="PROPERTY_IMG" ToRole="PROPERTY" />
-        </EntityType>
         <EntityType Name="PROPERTY_TYPE">
           <Key>
             <PropertyRef Name="ID" />
@@ -532,7 +511,7 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CodeType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Image" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="Boolean" />
           <NavigationProperty Name="PROPERTies" Relationship="Self.FK_PROPERTY_PROPERTY_TYPE" FromRole="PROPERTY_TYPE" ToRole="PROPERTY" />
         </EntityType>
         <EntityType Name="ROLE">
@@ -540,7 +519,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RoleName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="RoleName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="USERs" Relationship="Self.FK_USER_ROLE" FromRole="ROLE" ToRole="USER" />
         </EntityType>
         <EntityType Name="SOCIALNETWORK">
@@ -550,6 +529,7 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="SocialNetworkName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Link" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Icon" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="STREET">
           <Key>
@@ -648,18 +628,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PROPERTY_IMG_IMAGES">
-          <End Role="IMAGES" Type="Self.IMAGE" Multiplicity="0..1" />
-          <End Role="PROPERTY_IMG" Type="Self.PROPERTY_IMG" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="IMAGES">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="PROPERTY_IMG">
-              <PropertyRef Name="Img_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_PROPERTY_PROJECT_STATUS">
           <End Role="PROJECT_STATUS" Type="Self.PROJECT_STATUS" Multiplicity="0..1" />
           <End Role="PROPERTY" Type="Self.PROPERTY" Multiplicity="*" />
@@ -680,18 +648,6 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="PROPERTY_FEATURE">
-              <PropertyRef Name="Property_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PROPERTY_IMG_PROPERTY">
-          <End Role="PROPERTY" Type="Self.PROPERTY" Multiplicity="0..1" />
-          <End Role="PROPERTY_IMG" Type="Self.PROPERTY_IMG" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PROPERTY">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="PROPERTY_IMG">
               <PropertyRef Name="Property_ID" />
             </Dependent>
           </ReferentialConstraint>
@@ -772,12 +728,12 @@
           <EntitySet Name="CONTACTs" EntityType="Self.CONTACT" />
           <EntitySet Name="DISTRICTs" EntityType="Self.DISTRICT" />
           <EntitySet Name="FEATUREs" EntityType="Self.FEATURE" />
-          <EntitySet Name="IMAGES" EntityType="Self.IMAGE" />
+          <EntitySet Name="HISTORies" EntityType="Self.HISTORY" />
+          <EntitySet Name="MEMBERs" EntityType="Self.MEMBER" />
           <EntitySet Name="MESSAGEs" EntityType="Self.MESSAGE" />
           <EntitySet Name="PROJECT_STATUS" EntityType="Self.PROJECT_STATUS" />
           <EntitySet Name="PROPERTies" EntityType="Self.PROPERTY" />
           <EntitySet Name="PROPERTY_FEATURE" EntityType="Self.PROPERTY_FEATURE" />
-          <EntitySet Name="PROPERTY_IMG" EntityType="Self.PROPERTY_IMG" />
           <EntitySet Name="PROPERTY_TYPE" EntityType="Self.PROPERTY_TYPE" />
           <EntitySet Name="ROLEs" EntityType="Self.ROLE" />
           <EntitySet Name="SOCIALNETWORKs" EntityType="Self.SOCIALNETWORK" />
@@ -801,10 +757,6 @@
             <End Role="FEATURE" EntitySet="FEATUREs" />
             <End Role="PROPERTY_FEATURE" EntitySet="PROPERTY_FEATURE" />
           </AssociationSet>
-          <AssociationSet Name="FK_PROPERTY_IMG_IMAGES" Association="Self.FK_PROPERTY_IMG_IMAGES">
-            <End Role="IMAGES" EntitySet="IMAGES" />
-            <End Role="PROPERTY_IMG" EntitySet="PROPERTY_IMG" />
-          </AssociationSet>
           <AssociationSet Name="FK_PROPERTY_PROJECT_STATUS" Association="Self.FK_PROPERTY_PROJECT_STATUS">
             <End Role="PROJECT_STATUS" EntitySet="PROJECT_STATUS" />
             <End Role="PROPERTY" EntitySet="PROPERTies" />
@@ -812,10 +764,6 @@
           <AssociationSet Name="FK_PROPERTY_FEATURE_PROPERTY" Association="Self.FK_PROPERTY_FEATURE_PROPERTY">
             <End Role="PROPERTY" EntitySet="PROPERTies" />
             <End Role="PROPERTY_FEATURE" EntitySet="PROPERTY_FEATURE" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PROPERTY_IMG_PROPERTY" Association="Self.FK_PROPERTY_IMG_PROPERTY">
-            <End Role="PROPERTY" EntitySet="PROPERTies" />
-            <End Role="PROPERTY_IMG" EntitySet="PROPERTY_IMG" />
           </AssociationSet>
           <AssociationSet Name="FK_PROPERTY_PROPERTY_TYPE" Association="Self.FK_PROPERTY_PROPERTY_TYPE">
             <End Role="PROPERTY_TYPE" EntitySet="PROPERTY_TYPE" />
@@ -877,11 +825,26 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="IMAGES">
-            <EntityTypeMapping TypeName="team13Model.IMAGE">
-              <MappingFragment StoreEntitySet="IMAGES">
+          <EntitySetMapping Name="HISTORies">
+            <EntityTypeMapping TypeName="team13Model.HISTORY">
+              <MappingFragment StoreEntitySet="HISTORY">
                 <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="ImgName" ColumnName="ImgName" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="History1" ColumnName="History" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MEMBERs">
+            <EntityTypeMapping TypeName="team13Model.MEMBER">
+              <MappingFragment StoreEntitySet="MEMBER">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Member1" ColumnName="Member" />
+                <ScalarProperty Name="Member_Info" ColumnName="Member_Info" />
+                <ScalarProperty Name="Avatar" ColumnName="Avatar" />
+                <ScalarProperty Name="Facebook" ColumnName="Facebook" />
+                <ScalarProperty Name="Twitter" ColumnName="Twitter" />
+                <ScalarProperty Name="Instagram" ColumnName="Instagram" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -902,6 +865,7 @@
               <MappingFragment StoreEntitySet="PROJECT_STATUS">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Status_Name" ColumnName="Status_Name" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -942,22 +906,13 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PROPERTY_IMG">
-            <EntityTypeMapping TypeName="team13Model.PROPERTY_IMG">
-              <MappingFragment StoreEntitySet="PROPERTY_IMG">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Property_ID" ColumnName="Property_ID" />
-                <ScalarProperty Name="Img_ID" ColumnName="Img_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="PROPERTY_TYPE">
             <EntityTypeMapping TypeName="team13Model.PROPERTY_TYPE">
               <MappingFragment StoreEntitySet="PROPERTY_TYPE">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="CodeType" ColumnName="CodeType" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -975,6 +930,7 @@
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="SocialNetworkName" ColumnName="SocialNetworkName" />
                 <ScalarProperty Name="Link" ColumnName="Link" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

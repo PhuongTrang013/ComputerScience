@@ -12,18 +12,15 @@ namespace PPCRental.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class IMAGE
+    public partial class MEMBER
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public IMAGE()
-        {
-            this.PROPERTY_IMG = new HashSet<PROPERTY_IMG>();
-        }
-    
         public int ID { get; set; }
-        public string ImgName { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PROPERTY_IMG> PROPERTY_IMG { get; set; }
+        public string Member1 { get; set; }
+        public string Member_Info { get; set; }
+        public string Avatar { get; set; }
+        public string Facebook { get; set; }
+        public string Twitter { get; set; }
+        public string Instagram { get; set; }
+        public string Icon { get; set; }
     }
 }

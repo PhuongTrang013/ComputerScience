@@ -28,12 +28,12 @@ namespace PPCRental.Models
         public virtual DbSet<CONTACT> CONTACTs { get; set; }
         public virtual DbSet<DISTRICT> DISTRICTs { get; set; }
         public virtual DbSet<FEATURE> FEATUREs { get; set; }
-        public virtual DbSet<IMAGE> IMAGES { get; set; }
+        public virtual DbSet<HISTORY> HISTORies { get; set; }
+        public virtual DbSet<MEMBER> MEMBERs { get; set; }
         public virtual DbSet<MESSAGE> MESSAGEs { get; set; }
         public virtual DbSet<PROJECT_STATUS> PROJECT_STATUS { get; set; }
         public virtual DbSet<PROPERTY> PROPERTies { get; set; }
         public virtual DbSet<PROPERTY_FEATURE> PROPERTY_FEATURE { get; set; }
-        public virtual DbSet<PROPERTY_IMG> PROPERTY_IMG { get; set; }
         public virtual DbSet<PROPERTY_TYPE> PROPERTY_TYPE { get; set; }
         public virtual DbSet<ROLE> ROLEs { get; set; }
         public virtual DbSet<SOCIALNETWORK> SOCIALNETWORKs { get; set; }
