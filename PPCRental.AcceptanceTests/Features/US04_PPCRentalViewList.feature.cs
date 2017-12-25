@@ -18,14 +18,14 @@ namespace PPCRental.AcceptanceTests.Features
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.2.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [Microsoft.VisualStudio.TestTools.UnitTesting.TestClassAttribute()]
-    public partial class ViewprojectsFeature
+    public partial class US04_PPCRentalViewlistFeature
     {
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
         
         private Microsoft.VisualStudio.TestTools.UnitTesting.TestContext _testContext;
         
-#line 1 "US04_PPCRentalViewList.feature"
+#line 1 "US04_PPCRentalViewlist.feature"
 #line hidden
         
         public virtual Microsoft.VisualStudio.TestTools.UnitTesting.TestContext TestContext
@@ -44,7 +44,8 @@ namespace PPCRental.AcceptanceTests.Features
         public static void FeatureSetup(Microsoft.VisualStudio.TestTools.UnitTesting.TestContext testContext)
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner(null, 0);
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Viewprojects", "\tIn order to see list of project\r\n\tAs a user\r\n\tI want to see list of project", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "US04_PPCRentalViewlist", "\tAs a user\r\n\tI want to be she list of project", ProgrammingLanguage.CSharp, new string[] {
+                        "automated"});
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -59,9 +60,9 @@ namespace PPCRental.AcceptanceTests.Features
         public virtual void TestInitialize()
         {
             if (((testRunner.FeatureContext != null) 
-                        && (testRunner.FeatureContext.FeatureInfo.Title != "Viewprojects")))
+                        && (testRunner.FeatureContext.FeatureInfo.Title != "US04_PPCRentalViewlist")))
             {
-                global::PPCRental.AcceptanceTests.Features.ViewprojectsFeature.FeatureSetup(null);
+                global::PPCRental.AcceptanceTests.Features.US04_PPCRentalViewlistFeature.FeatureSetup(null);
             }
         }
         
@@ -84,64 +85,49 @@ namespace PPCRental.AcceptanceTests.Features
         
         public virtual void FeatureBackground()
         {
-#line 5
- #line hidden
-            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Name Project",
-                        "Address",
-                        "Price"});
-            table1.AddRow(new string[] {
-                        "Saigon Pearl Ruby Block 2",
-                        "Duong Bach Mai Q.Long Bien",
-                        "1950000000"});
-            table1.AddRow(new string[] {
-                        "PIS Top Apartment",
-                        "Dien Vien Thon Ba Vi",
-                        "2000000000"});
-            table1.AddRow(new string[] {
-                        "Apartment with Balcony",
-                        "Tien Phong Chuong My",
-                        "2100000000"});
 #line 6
- testRunner.Given("I am at home page", ((string)(null)), table1, "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Project Name",
+                        "District",
+                        "Ward",
+                        "Street",
+                        "Price",
+                        "Project Type",
+                        "Status"});
+            table1.AddRow(new string[] {
+                        "Saigon Pearl Ruby Block",
+                        "Chương Mỹ",
+                        "Đại Yên",
+                        "Ấp Tân Lập",
+                        "30000",
+                        "Apartmenr",
+                        "Đã duyệt"});
+#line 7
+testRunner.Given("following the projects", ((string)(null)), table1, "Given ");
 #line hidden
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("View List Of Project")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Viewprojects")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wweb")]
-        public virtual void ViewListOfProject()
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Check Property Name Of The List")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "US04_PPCRentalViewlist")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("automated")]
+        public virtual void CheckPropertyNameOfTheList()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("View List Of Project", new string[] {
-                        "wweb"});
-#line 13
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Check Property Name Of The List", ((string[])(null)));
+#line 11
 this.ScenarioSetup(scenarioInfo);
-#line 5
- this.FeatureBackground();
+#line 6
+this.FeatureBackground();
+#line 12
+ testRunner.When("I click DUAN", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Name Project",
-                        "Address",
-                        "Price"});
+                        "Project Name"});
             table2.AddRow(new string[] {
-                        "Saigon Pearl Ruby Block 2",
-                        "Duong Bach Mai Q.Long Bien",
-                        "1950000000"});
-            table2.AddRow(new string[] {
-                        "PIS Top Apartment",
-                        "Dien Vien Thon Ba Vi",
-                        "2000000000"});
-            table2.AddRow(new string[] {
-                        "Apartment with Balcony",
-                        "Tien Phong Chuong My",
-                        "2100000000"});
-#line 14
- testRunner.Given("I am at home page", ((string)(null)), table2, "Given ");
-#line 20
- testRunner.When("I click DUAN", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 21
- testRunner.Then("I will see list of project", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+                        "Saigon Pearl Ruby Block"});
+#line 13
+ testRunner.Then("I should see the list of project", ((string)(null)), table2, "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

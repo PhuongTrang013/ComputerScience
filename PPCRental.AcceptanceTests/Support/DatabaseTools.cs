@@ -11,11 +11,8 @@ namespace PPCRental.AcceptanceTests.Support
         {
             using (var db = new PPCEntities())
             {
-
-                db.PROPERTies.RemoveRange(db.PROPERTies);
-                db.PROPERTY_TYPE.RemoveRange(db.PROPERTY_TYPE);
                 db.PROPERTY_FEATURE.RemoveRange(db.PROPERTY_FEATURE);
-                db.PROPERTY_IMG.RemoveRange(db.PROPERTY_IMG);
+                db.PROPERTies.RemoveRange(db.PROPERTies);
                 db.SaveChanges();
             }
         }

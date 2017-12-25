@@ -9,6 +9,7 @@
 
         public ReferencePropertyList ReferenceDetails { get; set; }
         public ReferencePropertyList ReferenceFilter { get; set; }
-        
+        public ReferencePropertyList ReferenceViewList { get; set; }
+
     }
 }
