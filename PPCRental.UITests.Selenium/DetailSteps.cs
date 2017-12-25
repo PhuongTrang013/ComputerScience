@@ -28,7 +28,7 @@ namespace PPCRental.UITests.Selenium
                 var id = db.PROPERTies.ToList().FirstOrDefault(x => x.PropertyName == givenPrjName).ID;
                 Browser.FindElement(By.Id(id.ToString()));
             }
-            
+
         }
 
         [Then(@"the project details should show")]
