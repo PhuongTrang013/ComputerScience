@@ -6,7 +6,7 @@
     prop = db.PROPERTY_TYPE.ToList();
 }
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Đăng dự án";
     Layout = "~/Areas/Agency/Views/Shared/AgencyLayout.cshtml";
     //var nguyen = ViewData["District"];
 }
@@ -196,16 +196,15 @@
                     <p class="label">Mô tả chi tiết dự án</p>
                 </td>
                 <td>
-                    @*<textarea rows="7" cols="41" name="detail" placeholder="Nhập mô tả chi tiết dự án" style="border-radius: 7px;">(x =></textarea>*@
-                    <input class="input" type="text" name="content" />
+                   <input class="input" type="text" name="content" />
                 </td>
             </tr>
         </table>
     </div>
     <div class="button-area">
-        <button type="submit" style="background-color: #56bc55">Đăng dự án</button>
-        <button style="background-color: #f6b049">Lưu nháp</button>
-        <button style="background-color: #d5564d"><a href="~/Agency/PropertyAgency/IndexAgency">Hủy</a></button>
+        <button id="button-submit" type="submit" style="background-color: #56bc55">Đăng dự án</button>
+        <button id="button-savedraft" style="background-color: #f6b049">Lưu nháp</button>
+        <button id="button-cancel" tyle="background-color: #d5564d"><a href="~/Agency/PropertyAgency/IndexAgency">Hủy</a></button>
     </div>
 </div>
 }

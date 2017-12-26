@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="team13ModelStoreContainer" CdmEntityContainer="team13Entities">
+  <EntityContainerMapping StorageEntityContainer="team13ModelStoreContainer" CdmEntityContainer="PPCEntities">
     <EntitySetMapping Name="CONTACTs">
       <EntityTypeMapping TypeName="team13Model.CONTACT">
         <MappingFragment StoreEntitySet="CONTACT">
@@ -30,11 +30,26 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="IMAGES">
-      <EntityTypeMapping TypeName="team13Model.IMAGE">
-        <MappingFragment StoreEntitySet="IMAGES">
+    <EntitySetMapping Name="HISTORies">
+      <EntityTypeMapping TypeName="team13Model.HISTORY">
+        <MappingFragment StoreEntitySet="HISTORY">
           <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="ImgName" ColumnName="ImgName" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="History1" ColumnName="History" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MEMBERs">
+      <EntityTypeMapping TypeName="team13Model.MEMBER">
+        <MappingFragment StoreEntitySet="MEMBER">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Member1" ColumnName="Member" />
+          <ScalarProperty Name="Member_Info" ColumnName="Member_Info" />
+          <ScalarProperty Name="Avatar" ColumnName="Avatar" />
+          <ScalarProperty Name="Facebook" ColumnName="Facebook" />
+          <ScalarProperty Name="Twitter" ColumnName="Twitter" />
+          <ScalarProperty Name="Instagram" ColumnName="Instagram" />
+          <ScalarProperty Name="Icon" ColumnName="Icon" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -96,15 +111,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="PROPERTY_IMG">
-      <EntityTypeMapping TypeName="team13Model.PROPERTY_IMG">
-        <MappingFragment StoreEntitySet="PROPERTY_IMG">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="Property_ID" ColumnName="Property_ID" />
-          <ScalarProperty Name="Img_ID" ColumnName="Img_ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="PROPERTY_TYPE">
       <EntityTypeMapping TypeName="team13Model.PROPERTY_TYPE">
         <MappingFragment StoreEntitySet="PROPERTY_TYPE">
@@ -112,7 +118,6 @@
           <ScalarProperty Name="CodeType" ColumnName="CodeType" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="TypeCode" ColumnName="TypeCode" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -130,6 +135,7 @@
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="SocialNetworkName" ColumnName="SocialNetworkName" />
           <ScalarProperty Name="Link" ColumnName="Link" />
+          <ScalarProperty Name="Icon" ColumnName="Icon" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -259,3 +259,7 @@ D:\3\ComputerScience\PPCRental.AcceptanceTests\obj\Debug\PPCRental.AcceptanceTes
 D:\20.12\ComputerScience\PPCRental.AcceptanceTests\obj\Debug\PPCRental.AcceptanceTests.csprojResolveAssemblyReference.cache
 D:\20.12\ComputerScience\PPCRental.AcceptanceTests\obj\Debug\PPCRental.AcceptanceTests.dll
 D:\20.12\ComputerScience\PPCRental.AcceptanceTests\obj\Debug\PPCRental.AcceptanceTests.pdb
+C:\VLU\git\ComputerScience\PPCRental.AcceptanceTests\obj\Debug\PPCRental.AcceptanceTests.csprojResolveAssemblyReference.cache
+C:\VLU\git\ComputerScience\PPCRental.AcceptanceTests\obj\Debug\PPCRental.AcceptanceTests.csproj.CoreCompileInputs.cache
+C:\VLU\git\ComputerScience\PPCRental.AcceptanceTests\obj\Debug\PPCRental.AcceptanceTests.dll
+C:\VLU\git\ComputerScience\PPCRental.AcceptanceTests\obj\Debug\PPCRental.AcceptanceTests.pdb

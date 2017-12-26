@@ -15,12 +15,12 @@ namespace PPCRental.Areas.Agency.Controllers
         public ActionResult IndexAgency()
         {
             var us = db.PROPERTies.Find(int.Parse(Session["UserID"].ToString()));
-            //var product
+            //var product == null;
             //if (us.USER.Role == "1")
             //{
-                var product = db.PROPERTies.ToList().OrderByDescending(x => x.ID);
+            var product = db.PROPERTies.ToList().OrderByDescending(x => x.ID);
             //}
-            
+
             return View(product);
         }
 
@@ -59,6 +59,7 @@ namespace PPCRental.Areas.Agency.Controllers
             var model = new PROPERTY();
             return View(model);
         }
+        [ValidateInput(false)]
         [HttpPost]
         public ActionResult Create(PROPERTY prop, HttpPostedFileBase Avatar, List<HttpPostedFileBase> Image, List<int> chkfeature)//?
         {
@@ -174,7 +175,7 @@ namespace PPCRental.Areas.Agency.Controllers
             ViewBag.prop_district = db.DISTRICTs.ToList().OrderByDescending(x => x.ID);
             return View(prop);
         }
-
+        [ValidateInput(false)]
         [HttpPost]
         public ActionResult Edit(PROPERTY prop, HttpPostedFileBase Avatar, List<HttpPostedFileBase> Image, List<int> chkfeature)//?
         {
@@ -212,12 +213,21 @@ namespace PPCRental.Areas.Agency.Controllers
                 }
             }
 
-            foreach (int fe in chkfeature)
+            foreach (var pf in db.PROPERTY_FEATURE.ToList().Where(a => a.Property_ID == prop.ID))
+                db.PROPERTY_FEATURE.Remove(pf);
+            db.SaveChanges();
+            foreach (var fe in Request.Form.AllKeys.Where(k => k.StartsWith("chkFeature_")))
             {
-                PROPERTY_FEATURE fea = new PROPERTY_FEATURE();
-                fea.Feature_ID = db.FEATUREs.SingleOrDefault(x => x.ID == fe).ID;
-                fea.Property_ID = prop.ID;
-                db.PROPERTY_FEATURE.Add(fea);
+                if (Request.Form[fe].StartsWith("true"))
+                {
+                    var id = int.Parse(fe.Split('_')[1]);
+                    db.PROPERTY_FEATURE.Add(new PROPERTY_FEATURE
+                    {
+                        Property_ID = prop.ID,
+                        Feature_ID = id
+                    });
+                }
+                db.SaveChanges();
             }
 
             PROPERTY p = db.PROPERTies.Find(prop.ID);
@@ -242,11 +252,11 @@ namespace PPCRental.Areas.Agency.Controllers
         public ActionResult Delete(int id)
         {
             PROPERTY prop = db.PROPERTies.Find(id);
-            foreach (var fe in db.PROPERTY_FEATURE)
+            foreach(var item in db.PROPERTY_FEATURE)
             {
-                if (fe.Property_ID == id)
+                if (item.Property_ID == id)
                 {
-                    db.PROPERTY_FEATURE.Remove(fe);
+                    db.PROPERTY_FEATURE.Remove(item);
                 }
             }
             db.PROPERTies.Remove(prop);
@@ -259,67 +269,6 @@ namespace PPCRental.Areas.Agency.Controllers
         {
             var product = db.PROPERTies.FirstOrDefault(x => x.ID == id);
             return View(product);
-        }
-
-        [HttpGet]
-        public ActionResult Login()
-        {
-            return View();
-        }
-        [HttpPost]
-        public ActionResult Login(string email, string password)
-        {
-            var user = db.USERs.FirstOrDefault(x => x.Email.ToLower().Equals(email.ToLower()));
-            if (user != null)
-            {
-                if (user.Password.Equals(password))
-                {
-                    Session["Fullname"] = user.FullName;
-                    Session["UserID"] = user.ID;
-                    return RedirectToAction("IndexAgency");
-                }
-            }
-            else
-            {
-                return View();
-            }
-            return View();
-        }
-        public ActionResult Logout(int id)
-        {
-            var user = db.USERs.FirstOrDefault(x => x.ID == id);
-            if (user != null)
-            {
-                Session["Fullname"] = null;
-                Session["UserID"] = null;
-            }
-            return RedirectToAction("Login");
-        }
-        [HttpPost]
-        public ActionResult Register(string fullname, string email, string address, string phone, string password, string rpassword)
-        {
-            var user = db.USERs.FirstOrDefault(x => x.Email.ToLower() == email.ToLower());
-            if (user == null)
-            {
-                if (password.Equals(rpassword))
-                {
-                    USER us = new USER();
-                    us.Email = email;
-                    us.Address = address;
-                    us.Phone = phone;
-                    us.Password = password;
-                    db.USERs.Add(us);
-                    db.SaveChanges();
-                    Session["Fullname"] = us.FullName;
-                    Session["UserID"] = us.ID;
-                    return RedirectToAction("IndexAgency");
-                }
-            }
-            else
-            {
-                ViewBag.mgs = "Tài khoản đã tồn tại";
-            }
-            return View("Login");
         }
     }
 }

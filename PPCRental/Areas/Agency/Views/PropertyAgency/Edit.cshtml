@@ -2,12 +2,12 @@
 @model PPCRental.Models.PROPERTY
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Sửa thông tin";
     Layout = "~/Areas/Agency/Views/Shared/AgencyLayout.cshtml";
 }
 
 @{
-    team13Entities db = new team13Entities();
+    PPCEntities db = new PPCEntities();
     List<PROPERTY_TYPE> prop = new List<PROPERTY_TYPE>();
     prop = db.PROPERTY_TYPE.ToList();
 }
@@ -273,51 +273,9 @@
                         {
                             <div class="checkbox col-xs-6">
                                 @Html.CheckBox("chkFeature_" + feature.ID,
-                                db.PROPERTY_FEATURE.Count(pf => pf.Property_ID == Model.ID && pf.Feature_ID == feature.ID) > 0) @feature.FeatureName
-                            </div>
-                        }
-                        @*
-                            <div class="col-md-4 chk-feature" style="padding-left: 0px; padding-right: 0px;">
-                                <div class="checkbox">
-                                    <label><input type="checkbox" value="1" name="chkfeature">Ban công</label>
+                                     db.PROPERTY_FEATURE.Count(pf => pf.Property_ID == Model.ID && pf.Feature_ID == feature.ID) > 0) @feature.FeatureName
                                 </div>
-                                <div class="checkbox">
-                                    <label><input type="checkbox" value="5" name="chkfeature">Phòng tập gym</label>
-                                </div>
-                                <div class="checkbox">
-                                    <label><input type="checkbox" value="9" name="chkfeature">Hồ bơi</label>
-                                </div>
-                                <div class="checkbox">
-                                    <label><input type="checkbox" value="11" name="chkfeature">Bảo vệ</label>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4 chk-feature" style="padding-left: 0px; padding-right: 0px;">
-                                <div class="checkbox">
-                                    <label><input type="checkbox" value="2" name="chkfeature">Chỗ đậu xe</label>
-                                </div>
-                                <div class="checkbox">
-                                    <label><input type="checkbox" value="6" name="chkfeature">Nhà bếp</label>
-                                </div>
-                                <div class="checkbox">
-                                    <label><input type="checkbox" value="10" name="chkfeature">Sàn gỗ</label>
-                                </div>
-                                <div class="checkbox">
-                                    <label><input type="checkbox" value="8" name="chkfeature">Cho nuôi thú cưng</label>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4 chk-feature" style="padding-left: 0px; padding-right: 0px;">
-                                <div class="checkbox">
-                                    <label><input type="checkbox" value="3" name="chkfeature">Thang máy</label>
-                                </div>
-                                <div class="checkbox">
-                                    <label><input type="checkbox" value="7" name="chkfeature">Phòng giặt ủi</label>
-                                </div>
-                                <div class="checkbox">
-                                    <label><input type="checkbox" value="4" name="chkfeature">Vườn</label>
-                                </div>
-                            </div>*@
+                            }
                     </td>
                 </tr>
                 <tr>
@@ -325,7 +283,7 @@
                         <p class="label">Mô tả chi tiết dự án</p>
                     </td>
                     <td>
-                        <textarea rows="7" cols="41" name="content" style="border-radius: 7px;">@Html.ValueFor(x => x.Content)</textarea>
+                        <textarea rows="7" cols="41" name="content" placeholder="Nhập mô tả chi tiết dự án" style="border-radius: 7px;">@Html.ValueFor(x => x.Content)</textarea>
                         @*<input class="input" type="text" name="detail" value="@Html.ValueFor(x => x.Content)" />*@
                     </td>
                 </tr>
